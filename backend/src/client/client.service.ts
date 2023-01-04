@@ -1,26 +1,33 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { IClientRepository } from 'src/database/IClient-Repository.service';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
 
 @Injectable()
 export class ClientService {
+  constructor(
+    @Inject(IClientRepository)
+    private readonly clientRepository: IClientRepository,
+  ) {}
+
   create(createClientDto: CreateClientDto) {
-    return 'This action adds a new client';
+    return this.clientRepository.create(createClientDto);
   }
 
   findAll() {
-    return `This action returns all client`;
+    return this.clientRepository.findAll();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} client`;
+    return this.clientRepository.findOne(id);
   }
 
   update(id: number, updateClientDto: UpdateClientDto) {
-    return `This action updates a #${id} client`;
+    return this.clientRepository.update(id, updateClientDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} client`;
+    this.clientRepository.remove(id);
+    return 'Deleted';
   }
 }
