@@ -5,7 +5,7 @@ import { Client } from 'src/client/entities/client.entity';
 import { IClientRepository } from '../IClient-Repository.service';
 
 @Injectable()
-export class ClientRepository implements IClientRepository {
+export class ClientRepositoryInMemo implements IClientRepository {
   private clients: Client[] = [];
 
   public async create(data: CreateClientDto): Promise<Client> {
@@ -19,18 +19,22 @@ export class ClientRepository implements IClientRepository {
     return this.clients;
   }
 
-  public async findOne(id: number): Promise<Client> {
+  public async findOne(id: string): Promise<Client> {
     return this.clients.find((client) => client.id === id);
   }
 
-  public async update(id: number, data: UpdateClientDto): Promise<Client> {
+  public async findOneByEmail(email: string): Promise<Client> {
+    return this.clients.find((client) => client.email === email);
+  }
+
+  public async update(id: string, data: UpdateClientDto): Promise<Client> {
     const index = this.clients.findIndex((client) => client.id === id);
     Object.assign(this.clients[index], data);
     const client = this.clients[index];
     return client;
   }
 
-  public async remove(id: number): Promise<void> {
+  public async remove(id: string): Promise<void> {
     const index = this.clients.findIndex((client) => client.id === id);
     this.clients.splice(index, 1);
   }

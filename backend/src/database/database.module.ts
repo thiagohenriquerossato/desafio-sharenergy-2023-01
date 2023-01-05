@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
+import { PrismaModule } from 'src/prisma/prisma.module';
 import { IClientRepository } from './IClient-Repository.service';
-import { ClientRepository } from './inMemory/cliente-repository.service';
+import { ClientRepository } from './prisma/client-repository.service';
 
 @Module({
-  imports: [],
+  imports: [PrismaModule],
   providers: [
     {
       provide: IClientRepository,

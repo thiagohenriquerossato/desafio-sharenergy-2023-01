@@ -5,9 +5,10 @@ import { Client } from 'src/client/entities/client.entity';
 export interface IClientRepository {
   create(data: CreateClientDto): Promise<Client>;
   findAll(): Promise<Client[]>;
-  findOne(id: number): Promise<Client>;
-  update(id: number, client: UpdateClientDto): Promise<Client>;
-  remove(id: number): Promise<void>;
+  findOne(id: string): Promise<Client>;
+  findOneByEmail(email: string): Promise<Client>;
+  update(id: string, client: UpdateClientDto): Promise<Client>;
+  remove(id: string): Promise<void>;
 }
 
 export const IClientRepository = Symbol('IClientRepository');
