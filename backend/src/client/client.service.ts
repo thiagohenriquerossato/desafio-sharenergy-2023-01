@@ -1,5 +1,4 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
 import { ObjectID } from 'bson';
 import { IClientRepository } from 'src/database/IClient-Repository.service';
 import { CreateClientDto } from './dto/create-client.dto';
